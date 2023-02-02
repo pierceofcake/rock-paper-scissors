@@ -1,5 +1,10 @@
-const playerSelection = "rock";
+/* 
+  Basic text-based rock paper scissors game. Plays to 5 rounds and keeps score.
+*/
+
 const compSelection = getComputerChoice();
+let rounds = 0;
+let score = 0;
 
 function getComputerChoice() {
   let compChoice = Math.floor(Math.random() * 3);
@@ -17,44 +22,52 @@ function playRound(playerSelection, compSelection) {
   let playerChoice = playerSelection.toLowerCase();
 
   if (playerChoice === compSelection) {
-    return "Tie!";
+    alert("Tie!");
   } else {
     if (playerChoice === "rock") {
       if (compSelection === "scissors") {
-        return "You win! Rock beats scissors.";
+        alert("You win! Rock beats scissors.");
+        return 1;
       } else {
-        return "You lose! Paper beats rock.";
+        alert("You lose! Paper beats rock.");
+        return 0;
       }
     } else if (playerChoice === "paper") {
       if (compSelection === "rock") {
-        return "You win! Paper beats rock.";
+        alert("You win! Paper beats rock.");
+        return 1;
       } else {
-        return "You lose! Scissors beats paper.";
+        alert("You lose! Scissors beats paper.");
+        return 0;
       }
     } else if (playerChoice === "scissors") {
       if (compSelection === "paper") {
-        return "You win! Scissors beats paper.";
+        alert("You win! Scissors beats paper.");
+        return 1;
       } else {
-        return "You lose! Rock beats scissors.";
+        alert("You lose! Rock beats scissors.");
+        return 0;
       }
     }
   }
 }
 
-// TODO: fix game function - how to detect wins and add to score?
-
 function game() {
-  let score = 0;
+  let userInput = prompt('Type "rock", "paper", or "scissors".');
+  let result = playRound(userInput, getComputerChoice());
 
-  for (let i = 0; i < 5; i++) {
-    let userInput = prompt('Type "rock", "paper", or "scissors".');
-    if (playRound(userInput, getComputerChoice)[4] === "w") {
-      score++;
-    } else {
-      continue;
-    }
+  if (result === 1) {
+    return true;
   }
-  console.log(`Your final score after 5 rounds: ${score}`);
 }
 
-game();
+while (true) {
+  if (rounds >= 5) {
+    alert(`Your final score after 5 rounds: ${score}`);
+    break;
+  }
+  if (game()) {
+    score++;
+  }
+  rounds++;
+}
