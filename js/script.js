@@ -4,7 +4,8 @@
 
 const compSelection = getComputerChoice();
 let rounds = 0;
-let score = 0;
+let userScore = 0;
+let compScore = 0;
 
 function getComputerChoice() {
   let compChoice = Math.floor(Math.random() * 3);
@@ -23,6 +24,7 @@ function playRound(playerSelection, compSelection) {
 
   if (playerChoice === compSelection) {
     alert("Tie!");
+    return 2;
   } else {
     if (playerChoice === "rock") {
       if (compSelection === "scissors") {
@@ -57,17 +59,25 @@ function game() {
   let result = playRound(userInput, getComputerChoice());
 
   if (result === 1) {
-    return true;
+    return 1;
+  } else if (result === 0) {
+    return 0;
   }
 }
 
 while (true) {
   if (rounds >= 5) {
-    alert(`Your final score after 5 rounds: ${score}`);
+    alert(
+      `Final score after 5 rounds: You scored ${userScore} point(s). The computer's score was ${compScore} point(s).`
+    );
     break;
   }
-  if (game()) {
-    score++;
+  let result = game();
+
+  if (result === 1) {
+    userScore++;
+  } else if (result === 0) {
+    compScore++;
   }
   rounds++;
 }
