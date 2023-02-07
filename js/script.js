@@ -5,10 +5,12 @@
 let rounds = 0;
 let userScore = 0;
 let compScore = 0;
+let clear = true;
 const btnRock = document.querySelector(".rock");
 const btnPaper = document.querySelector(".paper");
 const btnScissors = document.querySelector(".scissors");
-const resultContainer = document.querySelector(".results");
+const resultContainer = document.querySelector(".results-container");
+const p = document.createElement("p");
 
 // while (true) {
 //   if (rounds >= 5) {
@@ -32,20 +34,21 @@ const resultContainer = document.querySelector(".results");
 btnRock?.addEventListener("click", () => {
   const compSelection = getComputerChoice();
   const result = playRound("rock", compSelection);
+  if (!clear) {
+    resultContainer?.removeChild(p);
+  }
 
   if (result === 1) {
-    const p = document.createElement("p");
     p.textContent = "You win! Rock beats scissors.";
     resultContainer?.appendChild(p);
   } else if (result === 0) {
-    const p = document.createElement("p");
     p.textContent = "You lose! Paper beats rock.";
     resultContainer?.appendChild(p);
   } else {
-    const p = document.createElement("p");
     p.textContent = "It's a tie! You both chose rock.";
     resultContainer?.appendChild(p);
   }
+  clear = false;
 });
 
 // Player chooses paper
@@ -55,15 +58,12 @@ btnPaper?.addEventListener("click", () => {
   const result = playRound("paper", compSelection);
 
   if (result === 1) {
-    const p = document.createElement("p");
     p.textContent = "You win! Paper beats rock.";
     resultContainer?.appendChild(p);
   } else if (result === 0) {
-    const p = document.createElement("p");
     p.textContent = "You lose! Scissors beats paper.";
     resultContainer?.appendChild(p);
   } else {
-    const p = document.createElement("p");
     p.textContent = "It's a tie! You both chose paper.";
     resultContainer?.appendChild(p);
   }
@@ -76,15 +76,12 @@ btnScissors?.addEventListener("click", () => {
   const result = playRound("scissors", compSelection);
 
   if (result === 1) {
-    const p = document.createElement("p");
     p.textContent = "You win! Scissors beats paper.";
     resultContainer?.appendChild(p);
   } else if (result === 0) {
-    const p = document.createElement("p");
     p.textContent = "You lose! Rock beats scissors.";
     resultContainer?.appendChild(p);
   } else {
-    const p = document.createElement("p");
     p.textContent = "It's a tie! You both chose scissors.";
     resultContainer?.appendChild(p);
   }
