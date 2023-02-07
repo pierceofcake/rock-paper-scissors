@@ -1,54 +1,43 @@
 /* 
-  Basic text-based rock paper scissors game. Plays to 5 rounds and keeps score.
+  Basic rock paper scissors game with UI and buttons.
+  Plays to 5 rounds and keeps score.
 */
 
-let rounds = 0;
-let userScore = 0;
+let playerScore = 0;
 let compScore = 0;
-let clear = true;
 const btnRock = document.querySelector(".rock");
 const btnPaper = document.querySelector(".paper");
 const btnScissors = document.querySelector(".scissors");
 const resultContainer = document.querySelector(".results-container");
-const p = document.createElement("p");
+const resultsText = document.createElement("p");
+const scoreContainer = document.querySelector(".score-container");
+const scoreText = document.createElement("p");
 
-// while (true) {
-//   if (rounds >= 5) {
-//     alert(
-//       `Final score after 5 rounds: You scored ${userScore} point(s). The computer's score was ${compScore} point(s).`
-//     );
-//     break;
-//   }
-//   let result = game();
+// Initialize scoreboard
 
-//   if (result === 1) {
-//     userScore++;
-//   } else if (result === 0) {
-//     compScore++;
-//   }
-//   rounds++;
-// }
+scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
+scoreContainer?.appendChild(scoreText);
 
 // Player chooses rock
 
 btnRock?.addEventListener("click", () => {
   const compSelection = getComputerChoice();
   const result = playRound("rock", compSelection);
-  if (!clear) {
-    resultContainer?.removeChild(p);
-  }
 
   if (result === 1) {
-    p.textContent = "You win! Rock beats scissors.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "You win! Rock beats scissors.";
+    resultContainer?.appendChild(resultsText);
+    playerScore++;
   } else if (result === 0) {
-    p.textContent = "You lose! Paper beats rock.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "You lose! Paper beats rock.";
+    resultContainer?.appendChild(resultsText);
+    compScore++;
   } else {
-    p.textContent = "It's a tie! You both chose rock.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "It's a tie! You both chose rock.";
+    resultContainer?.appendChild(resultsText);
   }
-  clear = false;
+  scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
+  checkForWinner(playerScore, compScore);
 });
 
 // Player chooses paper
@@ -58,15 +47,19 @@ btnPaper?.addEventListener("click", () => {
   const result = playRound("paper", compSelection);
 
   if (result === 1) {
-    p.textContent = "You win! Paper beats rock.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "You win! Paper beats rock.";
+    resultContainer?.appendChild(resultsText);
+    playerScore++;
   } else if (result === 0) {
-    p.textContent = "You lose! Scissors beats paper.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "You lose! Scissors beats paper.";
+    resultContainer?.appendChild(resultsText);
+    compScore++;
   } else {
-    p.textContent = "It's a tie! You both chose paper.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "It's a tie! You both chose paper.";
+    resultContainer?.appendChild(resultsText);
   }
+  scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
+  checkForWinner(playerScore, compScore);
 });
 
 // Player chooses scissors
@@ -76,16 +69,22 @@ btnScissors?.addEventListener("click", () => {
   const result = playRound("scissors", compSelection);
 
   if (result === 1) {
-    p.textContent = "You win! Scissors beats paper.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "You win! Scissors beats paper.";
+    resultContainer?.appendChild(resultsText);
+    playerScore++;
   } else if (result === 0) {
-    p.textContent = "You lose! Rock beats scissors.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "You lose! Rock beats scissors.";
+    resultContainer?.appendChild(resultsText);
+    compScore++;
   } else {
-    p.textContent = "It's a tie! You both chose scissors.";
-    resultContainer?.appendChild(p);
+    resultsText.textContent = "It's a tie! You both chose scissors.";
+    resultContainer?.appendChild(resultsText);
   }
+  scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
+  checkForWinner(playerScore, compScore);
 });
+
+// Helper functions
 
 function getComputerChoice() {
   let compChoice = Math.floor(Math.random() * 3);
@@ -126,13 +125,19 @@ function playRound(playerChoice, getComputerChoice) {
   }
 }
 
-// function game() {
-//   // let userInput = prompt('Type "rock", "paper", or "scissors".');
-//   let result = playRound(userInput, getComputerChoice());
-
-//   if (result === 1) {
-//     return 1;
-//   } else if (result === 0) {
-//     return 0;
-//   }
-// }
+function checkForWinner(playerScore, compScore) {
+  if (playerScore === 5) {
+    const h2 = document.createElement("h2");
+    h2.classList.add("results-text");
+    h2.textContent = `Nice! You won with ${playerScore} points. The computer's score was ${compScore}.`;
+    resultContainer?.appendChild(h2);
+    return 1;
+  }
+  if (compScore === 5) {
+    const h2 = document.createElement("h2");
+    h2.classList.add("results-text");
+    h2.textContent = `Better luck next time! The computer won with ${compScore} points. Your score was ${playerScore}.`;
+    resultContainer?.appendChild(h2);
+    return 1;
+  }
+}
