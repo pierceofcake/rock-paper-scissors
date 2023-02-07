@@ -1,3 +1,3 @@
 # rock-paper-scissors
 
-Text-based (for now) rock paper scissors game to practice JS.
+Graphical UI-based rock paper scissors game to practice DOM manipulation.

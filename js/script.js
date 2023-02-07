@@ -20,7 +20,31 @@ scoreContainer?.appendChild(scoreText);
 
 // Player chooses rock
 
-btnRock?.addEventListener("click", () => {
+btnRock?.addEventListener("click", playRock);
+
+// Player chooses paper
+
+btnPaper?.addEventListener("click", playPaper);
+
+// Player chooses scissors
+
+btnScissors?.addEventListener("click", playScissors);
+
+// Helper functions
+
+function getComputerChoice() {
+  let compChoice = Math.floor(Math.random() * 3);
+
+  if (compChoice < 1) {
+    return "rock";
+  } else if (compChoice < 2) {
+    return "paper";
+  } else if (compChoice < 3) {
+    return "scissors";
+  }
+}
+
+function playRock() {
   const compSelection = getComputerChoice();
   const result = playRound("rock", compSelection);
 
@@ -37,12 +61,15 @@ btnRock?.addEventListener("click", () => {
     resultContainer?.appendChild(resultsText);
   }
   scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
-  checkForWinner(playerScore, compScore);
-});
 
-// Player chooses paper
+  if (checkForWinner(playerScore, compScore) === 1) {
+    btnRock?.removeEventListener("click", playRock);
+    btnPaper?.removeEventListener("click", playPaper);
+    btnScissors?.removeEventListener("click", playScissors);
+  }
+}
 
-btnPaper?.addEventListener("click", () => {
+function playPaper() {
   const compSelection = getComputerChoice();
   const result = playRound("paper", compSelection);
 
@@ -59,12 +86,15 @@ btnPaper?.addEventListener("click", () => {
     resultContainer?.appendChild(resultsText);
   }
   scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
-  checkForWinner(playerScore, compScore);
-});
 
-// Player chooses scissors
+  if (checkForWinner(playerScore, compScore) === 1) {
+    btnRock?.removeEventListener("click", playRock);
+    btnPaper?.removeEventListener("click", playPaper);
+    btnScissors?.removeEventListener("click", playScissors);
+  }
+}
 
-btnScissors?.addEventListener("click", () => {
+function playScissors() {
   const compSelection = getComputerChoice();
   const result = playRound("scissors", compSelection);
 
@@ -81,20 +111,11 @@ btnScissors?.addEventListener("click", () => {
     resultContainer?.appendChild(resultsText);
   }
   scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
-  checkForWinner(playerScore, compScore);
-});
 
-// Helper functions
-
-function getComputerChoice() {
-  let compChoice = Math.floor(Math.random() * 3);
-
-  if (compChoice < 1) {
-    return "rock";
-  } else if (compChoice < 2) {
-    return "paper";
-  } else if (compChoice < 3) {
-    return "scissors";
+  if (checkForWinner(playerScore, compScore) === 1) {
+    btnRock?.removeEventListener("click", playRock);
+    btnPaper?.removeEventListener("click", playPaper);
+    btnScissors?.removeEventListener("click", playScissors);
   }
 }
 
