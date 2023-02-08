@@ -44,6 +44,7 @@ h2 {
 
 .reset {
   width: 300px;
+  margin-bottom: auto;
 }
 
 /* Button logic and styling courtesy of Josh Comeau [https://www.joshwcomeau.com/animation/3d-button/] */

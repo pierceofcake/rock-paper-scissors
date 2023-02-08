@@ -20,21 +20,19 @@ const finalText = document.createElement("h2");
 
 scoreText.textContent = `You: ${playerScore} Computer: ${compScore}`;
 scoreContainer?.appendChild(scoreText);
+resultContainer?.appendChild(resultsText);
+resultsText.textContent = "";
 
 // Player chooses rock
-
 btnRock?.addEventListener("click", playRock);
 
 // Player chooses paper
-
 btnPaper?.addEventListener("click", playPaper);
 
 // Player chooses scissors
-
 btnScissors?.addEventListener("click", playScissors);
 
 // Player resets
-
 btnReset?.addEventListener("click", reset);
 
 // Helper functions
