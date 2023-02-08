@@ -1,3 +1,3 @@
 # rock-paper-scissors
 
-Graphical UI-based rock paper scissors game to practice DOM manipulation.
+Rock paper scissors game built as part of The Odin Project to practice DOM manipulation.

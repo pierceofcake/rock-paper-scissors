@@ -8,14 +8,17 @@ let compScore = 0;
 const btnRock = document.querySelector(".rock");
 const btnPaper = document.querySelector(".paper");
 const btnScissors = document.querySelector(".scissors");
+const btnReset = document.querySelector(".reset");
+const playArea = document.querySelector(".play-area");
 const resultContainer = document.querySelector(".results-container");
 const resultsText = document.createElement("p");
 const scoreContainer = document.querySelector(".score-container");
 const scoreText = document.createElement("p");
+const finalText = document.createElement("h2");
 
 // Initialize scoreboard
 
-scoreText.textContent = `You: ${playerScore}  Computer: ${compScore}`;
+scoreText.textContent = `You: ${playerScore} Computer: ${compScore}`;
 scoreContainer?.appendChild(scoreText);
 
 // Player chooses rock
@@ -29,6 +32,10 @@ btnPaper?.addEventListener("click", playPaper);
 // Player chooses scissors
 
 btnScissors?.addEventListener("click", playScissors);
+
+// Player resets
+
+btnReset?.addEventListener("click", reset);
 
 // Helper functions
 
@@ -148,17 +155,26 @@ function playRound(playerChoice, getComputerChoice) {
 
 function checkForWinner(playerScore, compScore) {
   if (playerScore === 5) {
-    const h2 = document.createElement("h2");
-    h2.classList.add("results-text");
-    h2.textContent = `Nice! You won with ${playerScore} points. The computer's score was ${compScore}.`;
-    resultContainer?.appendChild(h2);
+    finalText.textContent = `Nice! You won with ${playerScore} points. The computer's score was ${compScore}.`;
+    resultContainer?.appendChild(finalText);
     return 1;
   }
   if (compScore === 5) {
-    const h2 = document.createElement("h2");
-    h2.classList.add("results-text");
-    h2.textContent = `Better luck next time! The computer won with ${compScore} points. Your score was ${playerScore}.`;
-    resultContainer?.appendChild(h2);
+    finalText.textContent = `Better luck next time! The computer won with ${compScore} points. Your score was ${playerScore}.`;
+    resultContainer?.appendChild(finalText);
     return 1;
   }
+}
+
+function reset() {
+  playerScore = 0;
+  compScore = 0;
+  scoreText.textContent = `You: ${playerScore} Computer: ${compScore}`;
+
+  resultsText.textContent = "";
+  finalText.textContent = "";
+
+  btnRock?.addEventListener("click", playRock);
+  btnPaper?.addEventListener("click", playPaper);
+  btnScissors?.addEventListener("click", playScissors);
 }

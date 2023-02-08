@@ -6,14 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="container">
-      <button class="rock">Rock</button>
-      <button class="paper">Paper</button>
-      <button class="scissors">Scissors</button>
+    <div class="play-area">
+      <div class="score-container"></div>
+      <div class="container">
+        <button class="rock pushable">
+          <span class="shadow"></span>
+          <span class="edge"></span>
+          <span class="front">✊ Rock</span>
+        </button>
+        <button class="paper pushable">
+          <span class="shadow"></span>
+          <span class="edge"></span>
+          <span class="front">✋ Paper</span>
+        </button>
+        <button class="scissors pushable">
+          <span class="shadow"></span>
+          <span class="edge"></span>
+          <span class="front">✌️ Scissors</span>
+        </button>
+      </div>
+      <div class="results-container"></div>
+      <div class="reset-container">
+        <button class="reset pushable">
+          <span class="shadow"></span>
+          <span class="edge"></span>
+          <span class="front">🔄 New Game</span>
+        </button>
+      </div>
     </div>
-    <div class="results-container"></div>
-    <div class="score-container"></div>
   </body>
 </html>
