@@ -37,14 +37,9 @@ h2 {
   font-size: 64px;
 }
 
-.reset-container {
-  display: flex;
-  margin-top: 100px;
-}
-
 .reset {
   width: 300px;
-  margin-bottom: auto;
+  margin-top: 16px;
 }
 
 /* Button logic and styling courtesy of Josh Comeau [https://www.joshwcomeau.com/animation/3d-button/] */
